@@ -991,7 +991,7 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen>
           ],
         );
 
-        final completedAt = _firstValue(
+        final finalAt = _firstValue(
           assignment,
           [
             'completeddatetime',
@@ -999,16 +999,6 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen>
             'completed_at',
             'delivered_at',
             'deliverydatetime',
-          ],
-        );
-
-        final cancelledAt = _firstValue(
-          assignment,
-          [
-            'cancelleddatetime',
-            'canceleddatetime',
-            'cancelled_at',
-            'canceled_at',
           ],
         );
 
@@ -1077,16 +1067,13 @@ class _ReportsScreenState extends ConsumerState<ReportsScreen>
                       color: AppColors.assigned,
                     ),
                     _TimelineBox(
-                      icon: Icons.check_circle_outline_rounded,
-                      label: 'Completed',
-                      value: _formatDateTime(completedAt),
-                      color: AppColors.completed,
-                    ),
-                    _TimelineBox(
-                      icon: Icons.cancel_outlined,
-                      label: 'Cancelled',
-                      value: _formatDateTime(cancelledAt),
-                      color: AppColors.cancelled,
+                      icon: Icons.event_available_outlined,
+                      label: 'Final Time',
+                      value: _formatDateTime(finalAt),
+                      color: status.toString().toLowerCase() == 'cancelled' ||
+                          status.toString().toLowerCase() == 'canceled'
+                          ? AppColors.cancelled
+                          : AppColors.completed,
                     ),
                   ],
                 ),
